@@ -1,0 +1,36 @@
+class Solution {
+bool isprime(int num){
+    bool issprime=true;
+    for(int i=2;i*i<=num;i++){
+    if(num%i==0){
+        issprime=false;
+        break;
+    }}
+    return issprime;
+}
+
+bool ispalin(int num){
+    string s=to_string(num);
+    int l=0,r=s.size()-1;
+    while(l<r){
+        if(s[l]!=s[r]){
+            return false;
+        }
+        l++;
+        r--;
+    }return true;}
+
+public:
+    int primePalindrome(int n) {
+        int num= n==1?2:n;
+        while(1){
+        if((num>1e3 && num<1e4) || (num>1e5 && num<1e6) || (num>1e7 &&num< 1e8)){
+            num = pow(10,ceil(log10(num)));;
+            continue;
+        }
+        if(isprime(num) && ispalin(num))
+            return num;
+        num++;
+    }
+    return -1;}
+};
