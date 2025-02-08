@@ -1,0 +1,34 @@
+class Solution {
+public:
+    const int MOD = 1e9 + 7;
+    bool isprime(int n){
+            if(n<2){
+                return false;
+            }
+            for(int i=2;i*i<=n;i++)
+            if(n%i==0){
+                return false;
+            }
+            return true;
+        }
+
+        long long factorial (int n){
+           long long res=1;
+           for(int i=2;i<=n;i++){
+            res=(res*i)%MOD;
+           }
+           return res;
+
+        }
+int numPrimeArrangements(int n) {
+int pc=0;
+ for (int i=1;i<=n;i++){
+    if(isprime(i)){
+     pc++;
+    }
+ }
+ int npc=n-pc;
+return (factorial(pc)*factorial(npc))% MOD;
+
+    }
+};
