@@ -1,0 +1,53 @@
+#define ll long long
+class Solution {
+public:
+  vector <long long> fact;
+  int mod=1e9+7; 
+  void facto(){
+    fact[0]=1;
+    fact[1]=1;
+    for(int i=2;i<=1e5;i++){
+        fact[i]=(fact[i-1]%mod*i%mod)%mod ;
+    }
+  }
+  ll powm(ll a,ll b){
+    ll ans=1;
+    while(b>0){
+        if(b%2==1){
+            ans=ans*a%mod;
+        }
+        a=a*a%mod;
+        b=b/2;
+    }
+    return ans;
+  }
+  int inverse(ll num){
+    return powm(num,mod-2);
+  }
+
+    int countAnagrams(string s) {
+        fact.resize(1e5+1);
+        facto();
+        ll ans=1;
+        ll count=0;
+        unordered_map<char,int>fr;
+        s+=' ';
+        for (int i=0;i<s.size();i++){
+            if(s[i]==' '){
+              ll v=fact[count];
+              for(auto it: fr){
+                v=v*inverse(fact[it.second])%mod;
+              }
+            ans=ans*v%mod ;
+            count=0;
+            fr.clear();
+            }
+            else{
+                count++;
+                fr[s[i]]++;
+        
+            }
+        }
+return ans;
+    }
+};
